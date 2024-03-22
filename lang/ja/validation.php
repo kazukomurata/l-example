@@ -229,10 +229,10 @@ return [
         'text'                     => 'テキスト',
         'time'                     => '時間',
         'title'                    => 'タイトル',
+        'tweet'                    => 'つぶやき',
         'updated_at'               => '更新日',
         'user'                     => 'ユーザー',
         'username'                 => 'ユーザー名',
         'year'                     => '年',
-        'tweet'                    => 'つぶやき',
     ],
 ];
