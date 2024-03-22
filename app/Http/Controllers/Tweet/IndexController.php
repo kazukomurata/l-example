@@ -15,7 +15,7 @@ class IndexController extends Controller
      */
     public function __invoke(Request $request, Factory $factory)
     {
-      $tweets = Tweet::all();
+      $tweets = Tweet::all()->sortByDesc('created_at');
       $data = ['tweets' => $tweets];
       return view('tweet.index', $data);
 
