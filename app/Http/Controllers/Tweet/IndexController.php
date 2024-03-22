@@ -20,7 +20,7 @@ class IndexController extends Controller
       return view('tweet.index', $data);
 
       // 1つめ.
-      return view('tweet.index', $data);
+      //return view('tweet.index', $data);
       // 2つめ
       //return view('tweet.index')->with('name', 'laravel');
       // 3つめ
