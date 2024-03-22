@@ -9,11 +9,10 @@
 </head>
 <body>
     <h1>つぶやきアプリ</h1>
-    {{ $name }}
-{{--    <div>--}}
-{{--    @foreach($tweets as $tweet)--}}
-{{--        <p>{{ $tweet->content }}</p>--}}
-{{--    @endforeach--}}
-{{--    </div>--}}
+    <div>
+    @foreach($tweets as $tweet)
+        <p>{{ $tweet->content }}</p>
+    @endforeach
+    </div>
 </body>
 </html>
