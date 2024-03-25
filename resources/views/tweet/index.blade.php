@@ -24,7 +24,7 @@
 
     <div>
     @foreach($tweets as $tweet)
-        <p>{{ $tweet->content }}</p>
+        <p>{{ $tweet->content }} : {{ $tweet->id }}</p>
     @endforeach
     </div>
 </body>
