@@ -17,6 +17,7 @@ namespace App\Models{
  *
  * @property int $id
  * @property string $content
+ * @property string $user_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @method static \Database\Factories\TweetFactory factory($count = null, $state = [])

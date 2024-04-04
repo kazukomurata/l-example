@@ -25,8 +25,14 @@ class CreateRequest extends FormRequest
             'tweet' => 'required|max:140'
         ];
     }
+
     public function tweet(): string
     {
-      return $this->input('tweet');
+        return $this->input('tweet');
+    }
+
+    public function userId(): int
+    {
+        return $this->user()->id;
     }
 }
