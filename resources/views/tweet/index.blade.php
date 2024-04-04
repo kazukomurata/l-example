@@ -12,6 +12,7 @@
     @if (session('feedback.success'))
         <p style="color: green">{{ session('feedback.success') }}</p>
     @endif
+    @auth
     <form action="{{ route('tweet.create') }}" method="post">
         @csrf
         <label for="tweet-content">つぶやき</label>
@@ -22,7 +23,7 @@
         @enderror
         <button type="submit">投稿</button>
     </form>
-
+    @endauth
 
 
     <div>
