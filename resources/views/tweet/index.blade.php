@@ -1,30 +1,61 @@
-<x-app-layout>
-    <h1>つぶやきアプリ</h1>
-    @if (session('feedback.success'))
-        <p style="color: green">{{ session('feedback.success') }}</p>
-    @endif
-    <x-tweet.form.post></x-tweet.form.post>
-    <div>
-        @foreach($tweets as $tweet)
-            <details>
-                <summary>{{ $tweet->content }} by {{  $tweet->user->name }}
-                </summary>
-                @if(\Illuminate\Support\Facades\Auth::id() === $tweet->user_id)
-                    <div>
-                        <a href="{{ route('tweet.update.index', ['tweetId' => $tweet->id]) }}">編集</a>
-                    </div>
-                    <form action="{{ route('tweet.delete', ['tweetId' => $tweet->id]) }}" method="post">
-                        @method('DELETE')
-                        @csrf
-                        <button type="submit">削除</button>
-                    </form>
-                @else
-                    対象外です
-                @endif
-            </details>
-        @endforeach
-    </div>
-</x-app-layout>
+<x-layout title="TOP | つぶやきアプリ">
+    <x-layouts.single>
+        @if (session('feedback.success'))
+            <p style="color: green">{{ session('feedback.success') }}</p>
+        @endif
+        <x-tweet.form.post></x-tweet.form.post>
+        <x-tweet.list :tweets="$tweets"></x-tweet.list>
+            <x-test></x-test>
+        <div>
+            @foreach($tweets as $tweet)
+                <details>
+                    <summary>{{ $tweet->content }} by {{  $tweet->user->name }}
+                    </summary>
+                    @if(\Illuminate\Support\Facades\Auth::id() === $tweet->user_id)
+                        <div>
+                            <a href="{{ route('tweet.update.index', ['tweetId' => $tweet->id]) }}">編集</a>
+                        </div>
+                        <form action="{{ route('tweet.delete', ['tweetId' => $tweet->id]) }}" method="post">
+                            @method('DELETE')
+                            @csrf
+                            <button type="submit">削除</button>
+                        </form>
+                    @else
+                        対象外です
+                    @endif
+                </details>
+            @endforeach
+        </div>
+    </x-layouts.single>
+</x-layout>
+
+{{--<x-app-layout>--}}
+{{--    <h1>つぶやきアプリ</h1>--}}
+{{--    @if (session('feedback.success'))--}}
+{{--        <p style="color: green">{{ session('feedback.success') }}</p>--}}
+{{--    @endif--}}
+{{--    <x-tweet.form.post></x-tweet.form.post>--}}
+{{--    <div>--}}
+{{--        @foreach($tweets as $tweet)--}}
+{{--            <details>--}}
+{{--                <summary>{{ $tweet->content }} by {{  $tweet->user->name }}--}}
+{{--                </summary>--}}
+{{--                @if(\Illuminate\Support\Facades\Auth::id() === $tweet->user_id)--}}
+{{--                    <div>--}}
+{{--                        <a href="{{ route('tweet.update.index', ['tweetId' => $tweet->id]) }}">編集</a>--}}
+{{--                    </div>--}}
+{{--                    <form action="{{ route('tweet.delete', ['tweetId' => $tweet->id]) }}" method="post">--}}
+{{--                        @method('DELETE')--}}
+{{--                        @csrf--}}
+{{--                        <button type="submit">削除</button>--}}
+{{--                    </form>--}}
+{{--                @else--}}
+{{--                    対象外です--}}
+{{--                @endif--}}
+{{--            </details>--}}
+{{--        @endforeach--}}
+{{--    </div>--}}
+{{--</x-app-layout>--}}
 
 
 {{--<!doctype html>--}}
