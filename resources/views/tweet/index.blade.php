@@ -6,26 +6,26 @@
         <x-tweet.form.post></x-tweet.form.post>
         <x-tweet.list :tweets="$tweets"></x-tweet.list>
             <x-test></x-test>
-        <div>
-            @foreach($tweets as $tweet)
-                <details>
-                    <summary>{{ $tweet->content }} by {{  $tweet->user->name }}
-                    </summary>
-                    @if(\Illuminate\Support\Facades\Auth::id() === $tweet->user_id)
-                        <div>
-                            <a href="{{ route('tweet.update.index', ['tweetId' => $tweet->id]) }}">編集</a>
-                        </div>
-                        <form action="{{ route('tweet.delete', ['tweetId' => $tweet->id]) }}" method="post">
-                            @method('DELETE')
-                            @csrf
-                            <button type="submit">削除</button>
-                        </form>
-                    @else
-                        対象外です
-                    @endif
-                </details>
-            @endforeach
-        </div>
+{{--        <div>--}}
+{{--            @foreach($tweets as $tweet)--}}
+{{--                <details>--}}
+{{--                    <summary>{{ $tweet->content }} by {{  $tweet->user->name }}--}}
+{{--                    </summary>--}}
+{{--                    @if(\Illuminate\Support\Facades\Auth::id() === $tweet->user_id)--}}
+{{--                        <div>--}}
+{{--                            <a href="{{ route('tweet.update.index', ['tweetId' => $tweet->id]) }}">編集</a>--}}
+{{--                        </div>--}}
+{{--                        <form action="{{ route('tweet.delete', ['tweetId' => $tweet->id]) }}" method="post">--}}
+{{--                            @method('DELETE')--}}
+{{--                            @csrf--}}
+{{--                            <button type="submit">削除</button>--}}
+{{--                        </form>--}}
+{{--                    @else--}}
+{{--                        対象外です--}}
+{{--                    @endif--}}
+{{--                </details>--}}
+{{--            @endforeach--}}
+{{--        </div>--}}
     </x-layouts.single>
 </x-layout>
 

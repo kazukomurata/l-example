@@ -18,6 +18,8 @@ class IndexController extends Controller
     {
         //$tweets = Tweet::all()->sortByDesc('created_at');
         $tweets = $service->getTweets();
+        //dump($tweets);
+        //app(\Illuminate\Foundation\Configuration\Exceptions::class)->render(request(), throw new \Error('dump report.'));
         $data = ['tweets' => $tweets];
         return view('tweet.index', $data);
 
