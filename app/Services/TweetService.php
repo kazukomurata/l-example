@@ -4,12 +4,15 @@ namespace App\Services;
 
 use App\Models\Image;
 use App\Models\Tweet;
+use App\Modules\ImageUpload\ImageManagerInterface;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class TweetService
 {
+
+    public function __construct(private ImageManagerInterface $imageManager) {}
 
     public function getTweets()
     {
@@ -40,9 +43,11 @@ class TweetService
             $tweet->content = $content;
             $tweet->save();
             foreach ($images as $image) {
-                Storage::putFile('public/images', $image);
+                //Storage::putFile('public/images', $image);
+                $name = $this->imageManager->save($image);
                 $imageModel = new Image();
-                $imageModel->name = $image->hashName();
+                //$imageModel->name = $image->hashName();
+                $imageModel->name = $name;
                 $imageModel->save();
                 $tweet->images()->attach($imageModel->id);
             }
@@ -54,10 +59,11 @@ class TweetService
         DB::transaction(function () use ($tweetId) {
             $tweet = Tweet::where('id', $tweetId)->firstOrFail();
             $tweet->images()->each(function ($image) use ($tweet) {
-                $filePath = 'public/images/' . $image->name;
-                if (Storage::exists($filePath)) {
-                    Storage::delete($filePath);
-                }
+//                $filePath = 'public/images/' . $image->name;
+//                if (Storage::exists($filePath)) {
+//                    Storage::delete($filePath);
+//                }
+                $this->imageManager->delete($image->name);
                 $tweet->images()->detach($image->id);
                 $image->delete();
             });
