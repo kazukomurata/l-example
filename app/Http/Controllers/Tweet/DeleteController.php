@@ -13,12 +13,12 @@ class DeleteController extends Controller
     public function __invoke(Request $request, TweetService $tweetService)
     {
         $tweetId = (int) $request->route('tweetId');
-        if (!$tweetService->checkOwnTweet($request->user()->id, $request->id())) {
+        if (!$tweetService->checkOwnTweet($request->user()->id, $tweetId)) {
             throw new AccessDeniedHttpException();
         }
-
-        $tweet = Tweet::whereId($tweetId)->firstOrFail();
-        $tweet->delete();
+        $tweetService->deleteTweet($tweetId);
+//        $tweet = Tweet::whereId($tweetId)->firstOrFail();
+//        $tweet->delete();
         return redirect()
           ->route('tweet.index')
           ->with('feedback.success', 'つぶやきを削除しました');
