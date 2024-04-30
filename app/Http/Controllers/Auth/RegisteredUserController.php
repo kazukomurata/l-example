@@ -46,8 +46,8 @@ class RegisteredUserController extends Controller
         event(new Registered($user));
 
         Auth::login($user);
-
-        $mailer->to('example@example.com')->send(new NewUserIntroduction());
+        $to = config('mail.from.address');
+        $mailer->to($to)->send(new NewUserIntroduction());
 
         return redirect(route('dashboard', absolute: false));
     }
